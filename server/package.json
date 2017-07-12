@@ -1,0 +1,17 @@
+{
+  "name": "node-rabbit",
+  "version": "1.0.0",
+  "main": "./server.js",
+  "scripts": {
+    "start": "nodemon -L -w .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "amqplib": "^0.5.1",
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}

@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+    server:
+        build: ./server
+        container_name: "server"
+        links:
+            - rabbit_1
+        ports:
+            - 8080:8080
+        volumes:
+            - ./server:/opt/node-rabbit/server
+            - /opt/node-rabbit/server/node_modules
+        depends_on:
+            - rabbit_1
+    rabbit_1:
+        image: "rabbitmq:3-management"
+        container_name: "rabbit_1"
+        hostname: "rabbit-1"
+        environment:
+            RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+            RABBITMQ_DEFAULT_USER: "rabbitmq"
+            RABBITMQ_DEFAULT_PASS: "rabbitmq"
+            RABBITMQ_DEFAULT_VHOST: "/"
+        ports:
+            - "15672:15672"
+            - "5672:5672"
+        labels:
+            NAME: "rabbitmq-1"
+        volumes:
+            - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+            - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config:rw
